@@ -1,4 +1,4 @@
-Blog application
+Blog application.
 This app lets you create to posts and view other people posts.
 
 How to use
