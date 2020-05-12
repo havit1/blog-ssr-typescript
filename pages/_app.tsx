@@ -1,18 +1,35 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Provider } from 'react-redux';
+
+import { NextPageContext } from 'next';
 import App from 'next/app';
+
+import { Provider } from 'react-redux';
+import { Store } from 'redux';
 import withReduxStore from '../lib/with-redux-store';
 
+import { GlobalStyle } from '../styles/globalStyles';
+import Navbar from '../components/Navbar/Navbar';
+export interface MyPageContext extends NextPageContext {
+    store: Store;
+    isServer?: boolean;
+}
 
-class MyApp extends App {
+interface Props {
+    store: Store;
+}
+class MyApp extends App<Props> {
     render() {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { Component, pageProps, store } = this.props;
+
         return (
-            <Provider store={store}>
-                <Component {...pageProps} />
-            </Provider>
+            <>
+                <GlobalStyle />
+                <Provider store={store}>
+                    <Navbar />
+                    <Component {...pageProps} />
+                </Provider>
+            </>
         );
     }
 }
